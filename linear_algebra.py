@@ -67,3 +67,12 @@ def matrix_sub(matrix1, matrix2):
         return [vector_sub(x, y) for x, y in zip(matrix1, matrix2)]
     else:
         raise ShapeError
+
+def matrix_scalar_multiply(matrix, scalar):
+    return [vector_multiply(x,scalar) for x in matrix]
+
+def matrix_vector_multiply(matrix, vector):
+    if shape(matrix)[1] == shape(vector) [0]:
+        return[dot(x, vector) for x in matrix]
+    else:
+        raise ShapeError

@@ -154,26 +154,26 @@ def test_shape_matrices():
 
 
 def test_matrix_row():
-#     """
-#            0 1  <- rows
-#        0 [[a b]]
-#        1 [[c d]]
-#        ^
-#      columns
-#     """
+    """
+           0 1  <- rows
+       0 [[a b]]
+       1 [[c d]]
+       ^
+     columns
+    """
     assert matrix_row(A, 0) == [1, 0, 0]
     assert matrix_row(B, 1) == [4, 5, 6]
     assert matrix_row(C, 2) == [1, 2]
 
 
 def test_matrix_col():
-#     """
-#            0 1  <- rows
-#        0 [[a b]]
-#        1 [[c d]]
-#        ^
-#      columns
-#     """
+    """
+           0 1  <- rows
+       0 [[a b]]
+       1 [[c d]]
+       ^
+     columns
+    """
     assert matrix_col(A, 0) == [1, 0, 0]
     assert matrix_col(B, 1) == [2, 5, 8]
     assert matrix_col(D, 2) == [3, 1]
@@ -203,42 +203,42 @@ def test_matrix_sub_checks_shapes():
     matrix_sub(C, D)
 
 
-# def test_matrix_scalar_multiply():
-# #     """
-# #     [[a b]   *  Z   =   [[a*Z b*Z]
-# #      [c d]]              [c*Z d*Z]]
-# #
-# #     Matrix * Scalar = Matrix
-# #     """
-# #     assert matrix_scalar_multiply(C, 3) == [[3, 6],
-# #                                             [6, 3],
-# #                                             [3, 6]]
-# #     assert matrix_scalar_multiply(B, 2) == [[ 2,  4,  6],
-# #                                             [ 8, 10, 12],
-# #                                             [14, 16, 18]]
-# #
-# #
-# # def test_matrix_vector_multiply():
-# #     """
-# #     [[a b]   *  [x   =   [a*x+b*y
-# #      [c d]       y]       c*x+d*y
-# #      [e f]                e*x+f*y]
-# #
-# #     Matrix * Vector = Vector
-# #     """
-# #     assert matrix_vector_multiply(A, [2, 5, 4]) == [2, 5, 4]
-# #     assert matrix_vector_multiply(B, [1, 2, 3]) == [14, 32, 50]
-# #     assert matrix_vector_multiply(C, [3, 4]) == [11, 10, 11]
-# #     assert matrix_vector_multiply(D, [0, 1, 2]) == [8, 4]
-# #
-# #
-# # @raises(ShapeError)
-# # def test_matrix_vector_multiply_checks_shapes():
-# #     """Shape Rule: The number of rows of the vector must equal the number of
-# #     columns of the matrix."""
-# #     matrix_vector_multiply(C, [1, 2, 3])
-# #
-# #
+def test_matrix_scalar_multiply():
+    """
+    [[a b]   *  Z   =   [[a*Z b*Z]
+     [c d]]              [c*Z d*Z]]
+
+    Matrix * Scalar = Matrix
+    """
+    assert matrix_scalar_multiply(C, 3) == [[3, 6],
+                                            [6, 3],
+                                            [3, 6]]
+    assert matrix_scalar_multiply(B, 2) == [[ 2,  4,  6],
+                                            [ 8, 10, 12],
+                                            [14, 16, 18]]
+
+
+def test_matrix_vector_multiply():
+    """
+    [[a b]   *  [x   =   [a*x+b*y
+     [c d]       y]       c*x+d*y
+     [e f]                e*x+f*y]
+
+    Matrix * Vector = Vector
+    """
+    assert matrix_vector_multiply(A, [2, 5, 4]) == [2, 5, 4]
+    assert matrix_vector_multiply(B, [1, 2, 3]) == [14, 32, 50]
+    assert matrix_vector_multiply(C, [3, 4]) == [11, 10, 11]
+    assert matrix_vector_multiply(D, [0, 1, 2]) == [8, 4]
+
+
+@raises(ShapeError)
+def test_matrix_vector_multiply_checks_shapes():
+    """Shape Rule: The number of rows of the vector must equal the number of
+    columns of the matrix."""
+    matrix_vector_multiply(C, [1, 2, 3])
+
+
 # # def test_matrix_matrix_multiply():
 # #     """
 # #     [[a b]   *  [[w x]   =   [[a*w+b*y a*x+b*z]
