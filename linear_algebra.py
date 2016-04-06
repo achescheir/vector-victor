@@ -42,6 +42,9 @@ def vector_multiply(vector, scalar):
 def vector_mean(*args):
     shapes = [shape(x) for x in args]
     if len(set(shapes)) == 1:
-        return [sum(x)/len(x) for x in zip(*args)]
+        return [sum(x) / len(x) for x in zip(*args)]
     else:
         raise ShapeError
+
+def magnitude(vector):
+    return sum([x ** 2 for x in vector]) ** 0.5
