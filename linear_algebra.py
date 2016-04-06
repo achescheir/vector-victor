@@ -54,7 +54,7 @@ def matrix_row(matrix, index):
     return matrix[index]
 
 def matrix_col(matrix, index):
-    return list(list(zip(*matrix))[index])
+    return matrix_row(transpose_matrix(matrix),index)
 
 def matrix_add(matrix1, matrix2):
     if shape(matrix1) == shape(matrix2):
