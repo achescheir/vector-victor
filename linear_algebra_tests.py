@@ -257,11 +257,11 @@ def test_matrix_matrix_multiply():
     assert matrix_matrix_multiply(D, C) == [[8, 10], [8, 10]]
 
 
-# # @raises(ShapeError)
-# # def test_matrix_matrix_multiply_checks_shapes():
-# #     """Shape Rule: The number of columns of the first matrix must equal the
-# #     number of rows of the second matrix."""
-# #     matrix_matrix_multiply(A, D)
-#
+@raises(ShapeError)
+def test_matrix_matrix_multiply_checks_shapes():
+    """Shape Rule: The number of columns of the first matrix must equal the
+    number of rows of the second matrix."""
+    matrix_matrix_multiply(A, D)
+
 # ## End of code provided from:
 # ## https://github.com/tiyd-python-2016-02/assignments/blob/master/week2/linear_algebra_test.py
