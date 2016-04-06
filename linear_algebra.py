@@ -3,13 +3,14 @@ class ShapeError(Exception):
     pass
 
 def shape(matrix):
-    # columns = [len(x), for x in matrix]
-    # columns_length = min(columns):
-    #
-    # if columns is None:
+    try:
+        columns = [len(x) for x in matrix]
+    except TypeError:
         return (len(matrix),)
-    # else
-    #     return
+    if len(set(columns)) != 1:
+        raise ShapeError
+    else:
+        return (len(matrix), list(set(columns))[0])
 
 def vector_add(vector1, vector2):
     if shape(vector1) == shape(vector2):
@@ -48,3 +49,21 @@ def vector_mean(*args):
 
 def magnitude(vector):
     return sum([x ** 2 for x in vector]) ** 0.5
+
+def matrix_row(matrix, index):
+    return matrix[index]
+
+def matrix_col(matrix, index):
+    return list(list(zip(*matrix))[index])
+
+def matrix_add(matrix1, matrix2):
+    if shape(matrix1) == shape(matrix2):
+        return [vector_add(x, y) for x, y in zip(matrix1, matrix2)]
+    else:
+        raise ShapeError
+
+def matrix_sub(matrix1, matrix2):
+    if shape(matrix1) == shape(matrix2):
+        return [vector_sub(x, y) for x, y in zip(matrix1, matrix2)]
+    else:
+        raise ShapeError
