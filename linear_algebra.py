@@ -24,4 +24,14 @@ def vector_sub(vector1, vector2):
         raise ShapeError
 
 def vector_sum(*args):
-    return [ sum(x) for x in zip(*args)]
+    shapes = [shape(x) for x in args]
+    if len(set(shapes)) == 1:
+        return [ sum(x) for x in zip(*args)]
+    else:
+        raise ShapeError
+
+def dot(vector1, vector2):
+    if shape(vector1) == shape(vector2):
+        return(sum([x * y for x, y in zip(vector1, vector2) ]))
+    else:
+        raise ShapeError
