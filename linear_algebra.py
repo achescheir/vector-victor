@@ -77,10 +77,12 @@ def matrix_vector_multiply(matrix, vector):
     else:
         raise ShapeError
 
+def transpose_matrix(matrix):
+    return [list(x) for x in zip(*matrix)]
+
 def matrix_matrix_multiply(matrix1, matrix2):
     if shape(matrix1)[1] == shape(matrix2) [0]:
         transposed_product = [[dot(m1, m2) for m1 in matrix1] for m2 in zip(*matrix2)]
-        correct_product = [list(x) for x in zip(*transposed_product)]
-        return correct_product
+        return transpose_matrix(transposed_product)
     else:
         raise ShapeError
