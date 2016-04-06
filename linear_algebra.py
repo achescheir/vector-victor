@@ -35,3 +35,13 @@ def dot(vector1, vector2):
         return(sum([x * y for x, y in zip(vector1, vector2) ]))
     else:
         raise ShapeError
+
+def vector_multiply(vector, scalar):
+    return [x * scalar for x in vector]
+
+def vector_mean(*args):
+    shapes = [shape(x) for x in args]
+    if len(set(shapes)) == 1:
+        return [sum(x)/len(x) for x in zip(*args)]
+    else:
+        raise ShapeError
