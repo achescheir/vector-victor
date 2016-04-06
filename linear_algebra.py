@@ -22,3 +22,6 @@ def vector_sub(vector1, vector2):
         return[x - y for x, y in zip(vector1, vector2)]
     else:
         raise ShapeError
+
+def vector_sum(*args):
+    return [ sum(x) for x in zip(*args)]
