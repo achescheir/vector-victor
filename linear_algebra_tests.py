@@ -325,3 +325,29 @@ def test_Vector2d_sub():
 def test_Vector2d_sub_checks_shapes():
     """Shape rule: the vectors must be the same size."""
     vector_m - vector_v
+
+def test_Vector2d_sum():
+    """vector_sum can take any number of vectors and add them together."""
+    assert sum([vector_v, vector_w, vector_u, vector_y, vector_z])._value == vector_sum(v, w, u, y, z) #== [12, 26, 35]
+
+
+@raises(ShapeError)
+def test_Vector2d_sum_checks_shapes():
+    """Shape rule: the vectors must be the same size."""
+    sum([vector_v, vector_w, vector_m, vector_y])
+
+
+def test_Vector2d_dot():
+    """
+    dot([a b], [c d])   = a * c + b * d
+    dot(Vector, Vector) = Scalar
+    """
+    assert vector_w.dot(vector_y) == dot(w, y) #== 160
+    assert vector_m.dot(vector_n) == dot(m, n) #== 15
+    assert vector_u.dot(vector_z) == dot(u, z) #== 0
+
+
+@raises(ShapeError)
+def test_Vector2d_dot_checks_shapes():
+    """Shape rule: the vectors must be the same size."""
+    vector_v.dot(vector_m)

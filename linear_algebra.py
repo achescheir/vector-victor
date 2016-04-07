@@ -23,20 +23,17 @@ class Vector2d:
         self.same_shape(other)
         return Vector2d([x - y for x, y in zip(self._value, other._value)])
 
+    def __radd__(self, other):
+        if other == 0:
+            return self
+        else:
+            raise TypeError
 
-# def vector_sub(vector1, vector2):
-#     if shape(vector1) == shape(vector2):
-#         return[x - y for x, y in zip(vector1, vector2)]
-#     else:
-#         raise ShapeError
-#
-# def vector_sum(*args):
-#     shapes = [shape(x) for x in args]
-#     if len(set(shapes)) == 1:
-#         return [ sum(x) for x in zip(*args)]
-#     else:
-#         raise ShapeError
-#
+    def dot(self,other):
+        self.same_shape(other)
+        return sum([x * y for x, y in zip(self._value, other._value) ])
+
+
 # def dot(vector1, vector2):
 #     if shape(vector1) == shape(vector2):
 #         return(sum([x * y for x, y in zip(vector1, vector2) ]))
