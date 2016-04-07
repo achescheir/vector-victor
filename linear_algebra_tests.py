@@ -385,3 +385,136 @@ def test_Vector2d_magnitude():
     assert vector_v.magnitude() == magnitude(v)# == math.sqrt(10)
     assert vector_y.magnitude() == magnitude(y)# == math.sqrt(1400)
     assert vector_z.magnitude() == magnitude(z)# == 0
+
+def test_Matrix_constructor():
+    assert Matrix(A)._value == A
+
+matrix_A = Matrix(A)
+matrix_B = Matrix(B)
+matrix_C = Matrix(C)
+matrix_D = Matrix(D)
+
+def test_shape_Matrices():
+    """shape takes a vector or matrix and return a tuple with the
+    number of rows (for a vector) or the number of rows and columns
+    (for a matrix.)"""
+    assert matrix_A.shape() == shape(A)# == (3, 3)
+    assert matrix_C.shape() == shape(C)# == (3, 2)
+    assert matrix_D.shape() == shape(D)# == (2, 3)
+
+
+def test_Matrix_row():
+    """
+           0 1  <- rows
+       0 [[a b]]
+       1 [[c d]]
+       ^
+     columns
+    """
+    assert matrix_A.row(0) == matrix_row(A, 0)# == [1, 0, 0]
+    assert matrix_B.row(1) == matrix_row(B, 1)# == [4, 5, 6]
+    assert matrix_C.row(2) == matrix_row(C, 2)# == [1, 2]
+
+# def test_Matrix_get_transpose():
+#     print(matrix_A.get_transpose()._value)
+#     assert matrix_A.get_transpose() == matrix_A
+#     assert matrix_B.get_transpose()._value == [[1,4,7],
+#          [2,5,8],
+#          [3,6,9]]
+#
+# def test_Matrix_col():
+#     """
+#            0 1  <- rows
+#        0 [[a b]]
+#        1 [[c d]]
+#        ^
+#      columns
+#     """
+#     assert matrix_A.col(0) == matrix_col(A, 0)# == [1, 0, 0]
+#     assert matrix_B.col(1) == matrix_col(B, 1)# == [2, 5, 8]
+#     assert matrix_C.col(2) == matrix_col(D, 2)# == [3, 1]
+
+
+# def test_matrix_matrix_add():
+#     assert matrix_add(A, B) == [[2, 2, 3],
+#                                 [4, 6, 6],
+#                                 [7, 8, 10]]
+#
+#
+# @raises(ShapeError)
+# def test_matrix_add_checks_shapes():
+#     """Shape rule: the rows and columns of the matrices must be the same size."""
+#     matrix_add(C, D)
+#
+#
+# def test_matrix_matrix_sub():
+#     assert matrix_sub(A, B) == [[ 0, -2, -3],
+#                                 [-4, -4, -6],
+#                                 [-7, -8, -8]]
+#
+#
+# @raises(ShapeError)
+# def test_matrix_sub_checks_shapes():
+#     """Shape rule: the rows and columns of the matrices must be the same size."""
+#     matrix_sub(C, D)
+#
+#
+# def test_matrix_scalar_multiply():
+#     """
+#     [[a b]   *  Z   =   [[a*Z b*Z]
+#      [c d]]              [c*Z d*Z]]
+#
+#     Matrix * Scalar = Matrix
+#     """
+#     assert matrix_scalar_multiply(C, 3) == [[3, 6],
+#                                             [6, 3],
+#                                             [3, 6]]
+#     assert matrix_scalar_multiply(B, 2) == [[ 2,  4,  6],
+#                                             [ 8, 10, 12],
+#                                             [14, 16, 18]]
+#
+#
+# def test_matrix_vector_multiply():
+#     """
+#     [[a b]   *  [x   =   [a*x+b*y
+#      [c d]       y]       c*x+d*y
+#      [e f]                e*x+f*y]
+#
+#     Matrix * Vector = Vector
+#     """
+#     assert matrix_vector_multiply(A, [2, 5, 4]) == [2, 5, 4]
+#     assert matrix_vector_multiply(B, [1, 2, 3]) == [14, 32, 50]
+#     assert matrix_vector_multiply(C, [3, 4]) == [11, 10, 11]
+#     assert matrix_vector_multiply(D, [0, 1, 2]) == [8, 4]
+#
+#
+# @raises(ShapeError)
+# def test_matrix_vector_multiply_checks_shapes():
+#     """Shape Rule: The number of rows of the vector must equal the number of
+#     columns of the matrix."""
+#     matrix_vector_multiply(C, [1, 2, 3])
+#
+#
+# def test_matrix_matrix_multiply():
+#     """
+#     [[a b]   *  [[w x]   =   [[a*w+b*y a*x+b*z]
+#      [c d]       [y z]]       [c*w+d*y c*x+d*z]
+#      [e f]                    [e*w+f*y e*x+f*z]]
+#
+#     Matrix * Matrix = Matrix
+#     """
+#     assert matrix_matrix_multiply(A, B) == B
+#     assert matrix_matrix_multiply(B, C) == [[8, 10],
+#                                             [20, 25],
+#                                             [32, 40]]
+#     assert matrix_matrix_multiply(C, D) == [[7, 6, 5],
+#                                             [5, 6, 7],
+#                                             [7, 6, 5]]
+#     assert matrix_matrix_multiply(D, C) == [[8, 10], [8, 10]]
+#
+#
+# @raises(ShapeError)
+# def test_matrix_matrix_multiply_checks_shapes():
+#     """Shape Rule: The number of columns of the first matrix must equal the
+#     number of rows of the second matrix."""
+#     matrix_matrix_multiply(A, D)

@@ -48,12 +48,26 @@ class Vector2d:
     def magnitude(self):
         return sum([x ** 2 for x in self._value]) ** 0.5
 
-# def matrix_row(matrix, index):
-#     return matrix[index]
-#
-# def matrix_col(matrix, index):
-#     return matrix_row(transpose_matrix(matrix),index)
-#
+class Matrix:
+    def __init__(self, value = [[]]):
+        self._value = value
+
+    def shape(self):
+        columns = [len(x) for x in self._value]
+        if len(set(columns)) != 1:
+            raise ShapeError
+        else:
+            return (len(self._value), list(set(columns))[0])
+
+    def row(self, index):
+        return self._value[index][:]
+
+    def col(self, index):
+        return self.get_transpose().row(index)
+
+    def get_transpose(self):
+        return Matrix([list(x) for x in zip(*self._value)])
+
 # def matrix_add(matrix1, matrix2):
 #     if shape(matrix1) == shape(matrix2):
 #         return [vector_add(x, y) for x, y in zip(matrix1, matrix2)]
@@ -75,9 +89,7 @@ class Vector2d:
 #     else:
 #         raise ShapeError
 #
-# def transpose_matrix(matrix):
-#     return [list(x) for x in zip(*matrix)]
-#
+
 # def matrix_matrix_multiply(matrix1, matrix2):
 #     if shape(matrix1)[1] == shape(matrix2) [0]:
 #         transposed_product = [[dot(m1, m2) for m1 in matrix1] for m2 in zip(*matrix2)]
@@ -86,8 +98,6 @@ class Vector2d:
 #         raise ShapeError
 #         return
 
-class Matrix:
-    pass
 
 class ShapeError(Exception):
     pass
