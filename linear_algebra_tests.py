@@ -265,3 +265,63 @@ def test_matrix_matrix_multiply_checks_shapes():
 
 # ## End of code provided from:
 # ## https://github.com/tiyd-python-2016-02/assignments/blob/master/week2/linear_algebra_test.py
+#Tests for class versions of matrix and vector code
+
+def test_Vector2d_constructor():
+    assert Vector2d([1,2,3])._value == [1,2,3]
+
+vector_m = Vector2d(m)
+vector_n = Vector2d(n)
+
+vector_u = Vector2d(u)
+vector_v = Vector2d(v)
+vector_w = Vector2d(w)
+vector_y = Vector2d(y)
+vector_z = Vector2d(z)
+
+def test_shape_Vector2ds():
+    print(shape([1]), Vector2d([]).shape())
+    assert shape([1]) == Vector2d([1]).shape()
+    assert shape(m) == vector_m.shape()
+    assert shape(v) == vector_v.shape()
+
+def test_Vector2d_add():
+    """
+    [a b]  + [c d]  = [a+c b+d]
+    Matrix + Matrix = Matrix
+    """
+    assert (vector_v + vector_w)._value == vector_add(v, w) #== [1, 5, 4]
+    assert (vector_u + vector_y)._value == vector_add(u, y) #== [11, 21, 31]
+    assert (vector_u + vector_z)._value == vector_add(u, z) #== u
+
+def test_Vector2d_eq():
+    assert vector_u == Vector2d(u)
+    assert vector_u != Vector2d(v)
+
+@raises (ShapeError)
+def test_Vector2d_eq_checks_shapes():
+    Vector2d([1,1]) == Vector2d([1,1,1])
+
+def test_Vector2d_add_is_commutative():
+    assert vector_w + vector_y == vector_y + vector_w
+
+@raises(ShapeError)
+def test_Vector2d_add_checks_shapes():
+    """Shape rule: the vectors must be the same size."""
+    vector_m + vector_v
+
+def test_Vector2d_sub():
+    """
+    [a b]  - [c d]  = [a-c b-d]
+    Matrix + Matrix = Matrix
+    """
+    assert (vector_v - vector_w)._value == vector_sub(v, w) #== [1, 1, -4]
+    assert (vector_w - vector_v)._value == vector_sub(w, v) #== [-1, -1, 4]
+    assert (vector_y - vector_z)._value == vector_sub(y, z) #== y
+    assert (vector_w - vector_u)._value == vector_sub(w, u) #== vector_sub(z, vector_sub(u, w))
+    assert vector_w - vector_u == vector_z - (vector_u - vector_w) #vector_sub(z, vector_sub(u, w))
+
+@raises(ShapeError)
+def test_Vector2d_sub_checks_shapes():
+    """Shape rule: the vectors must be the same size."""
+    vector_m - vector_v
