@@ -29,30 +29,25 @@ class Vector2d:
         else:
             raise TypeError
 
-    def dot(self,other):
+    def dot(self, other):
         self.same_shape(other)
         return sum([x * y for x, y in zip(self._value, other._value) ])
 
+    def __mul__(self, other):
+        return Vector2d([x * other for x in self._value])
 
-# def dot(vector1, vector2):
-#     if shape(vector1) == shape(vector2):
-#         return(sum([x * y for x, y in zip(vector1, vector2) ]))
-#     else:
-#         raise ShapeError
-#
-# def vector_multiply(vector, scalar):
-#     return [x * scalar for x in vector]
-#
-# def vector_mean(*args):
-#     shapes = [shape(x) for x in args]
-#     if len(set(shapes)) == 1:
-#         return [sum(x) / len(x) for x in zip(*args)]
-#     else:
-#         raise ShapeError
-#
-# def magnitude(vector):
-#     return sum([x ** 2 for x in vector]) ** 0.5
-#
+
+    def mean(*args):
+        shapes = [x.shape() for x in args]
+        if len(set(shapes)) == 1:
+            arg_vals = [x._value for x in args]
+            return Vector2d([sum(x) / len(x) for x in zip(*arg_vals)])
+        else:
+            raise ShapeError
+
+    def magnitude(self):
+        return sum([x ** 2 for x in self._value]) ** 0.5
+
 # def matrix_row(matrix, index):
 #     return matrix[index]
 #

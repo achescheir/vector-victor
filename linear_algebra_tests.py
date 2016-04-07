@@ -351,3 +351,37 @@ def test_Vector2d_dot():
 def test_Vector2d_dot_checks_shapes():
     """Shape rule: the vectors must be the same size."""
     vector_v.dot(vector_m)
+
+def test_Vector2d_multiply():
+    """
+    [a b]  *  Z     = [a*Z b*Z]
+    Vector * Scalar = Vector
+    """
+    assert (vector_v * 0.5)._value == vector_multiply(v, 0.5) #== [0.5, 1.5, 0]
+    assert (vector_m * 2)._value == vector_multiply(m, 2) #== [6, 8]
+
+
+def test_Vector2d_mean():
+    """
+    mean([a b], [c d]) = [mean(a, c) mean(b, d)]
+    mean(Vector)       = Vector
+    """
+    assert Vector2d.mean(vector_m, vector_n)._value == vector_mean(m, n)# == [4, 2]
+    assert Vector2d.mean(vector_v,vector_w)._value == vector_mean(v, w)# == [0.5, 2.5, 2]
+    assert are_equal(Vector2d.mean(vector_v,vector_w, vector_u)._value[0],vector_mean(v, w, u)[0])#, 2 / 3)
+    assert are_equal(Vector2d.mean(vector_v,vector_w, vector_u)._value[1],vector_mean(v, w, u)[1])#, 2)
+    assert are_equal(Vector2d.mean(vector_v,vector_w, vector_u)._value[2],vector_mean(v, w, u)[2])#, 5 / 3)
+
+@raises(ShapeError)
+def test_Vector2d_mean_checks_shapes():
+    Vector2d.mean(vector_m, vector_v)
+
+def test_Vector2d_magnitude():
+    """
+    magnitude([a b])  = sqrt(a^2 + b^2)
+    magnitude(Vector) = Scalar
+    """
+    assert vector_m.magnitude() == magnitude(m)# == 5
+    assert vector_v.magnitude() == magnitude(v)# == math.sqrt(10)
+    assert vector_y.magnitude() == magnitude(y)# == math.sqrt(1400)
+    assert vector_z.magnitude() == magnitude(z)# == 0
